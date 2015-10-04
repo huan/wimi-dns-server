@@ -5,17 +5,22 @@
 
 ARGV=$@
 
+echo ">> Starting..."
 cd /app
 
-if [ 0 -eq ${#@} ]
+if [ 0 -eq ${#@} ] || [ "start" == "$1" ]
 then
-    echo ">> Starting..."
     while true; do
         npm start
-        echo ">> Restarting..."
         sleep 1
+        echo ">> Restarting..."
     done
+elif [ "test" == "$1" ]
+then
+    exec npm test
 else
     echo ">> Exec $@ ..."
     exec $@
 fi
+
+echo "Ahhh!? what happened??"

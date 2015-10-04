@@ -1,14 +1,35 @@
 #!/usr/bin/node
 
+var BANNER = " \n\
+__        ___           _     _       __  __         ___ ____  \n\
+\\ \\      / / |__   __ _| |_  (_)___  |  \\/  |_   _  |_ _|  _ \\ \n\
+ \\ \\ /\\ / /| '_ \\ / _` | __| | / __| | |\\/| | | | |  | || |_) |\n\
+  \\ V  V / | | | | (_| | |_  | \\__ \\ | |  | | |_| |  | ||  __/ \n\
+   \\_/\\_/  |_| |_|\\__,_|\\__| |_|___/ |_|  |_|\\__, | |___|_|    \n\
+                                             |___/             \n\
+     ____  _   _ ____    ____                            \n\
+    |  _ \\| \\ | / ___|  / ___|  ___ _ ____   _____ _ __  \n\
+    | | | |  \\| \\___ \\  \\___ \\ / _ \\ '__\\ \\ / / _ \\ '__| \n\
+    | |_| | |\\  |___) |  ___) |  __/ |   \\ V /  __/ |    \n\
+    |____/|_| \\_|____/  |____/ \\___|_|    \\_/ \\___|_|    \n\
+\n\
+"
+
+console.log(BANNER)
+
 var dnsd = require('dnsd')
 
 var wimi = dnsd.createServer(function(req, res) {
-    var qeryName    = req.question.name
-    var queryType   = req.question.type
-    var queryClass  = req.question.class
+    var queryName   = req.question[0].name
+    var queryType   = req.question[0].type
+    var queryClass  = req.question[0]['class']
     var remoteAddress = req.connection.remoteAddress
 
-    console.log(remoteAddress)
+    console.log(">> "
+                + new Date().toISOString()
+                + ' ' + remoteAddress
+                + ' ' + queryName
+               )
     res.end(remoteAddress)
 })
 
@@ -26,9 +47,11 @@ function show_help() {
         console.log('  dig @' + socket.address().address + ' WhatIsMyIp.zixia.net')
         socket.end()
     })
+
     socket.on('error', function(e) {
         console.log('Get my IP by send a DNS Query. i.e.:')
         console.log('  dig @WiMi-dns-server-ip WhatIsMyIp.zixia.net')
+	console.log('')
     });
     /*
     http://unix.stackexchange.com/a/81699
@@ -39,3 +62,4 @@ function show_help() {
    https://github.com/rsp/scripts/blob/master/externalip
     */
 }
+

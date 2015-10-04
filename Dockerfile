@@ -1,21 +1,21 @@
 FROM alpine:latest
 
-MAINTAINER Zhuohuan LI <zixia@zixia.net> https://github.com/zixia
-
-COPY entrypoint.sh /
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["--help"]
-
-WORKDIR /app
+MAINTAINER Zhuohuan LI <zixia@zixia.net>
 
 RUN apk add --update \
     bash \
+    drill \
     nodejs
 
-EXPOSE 53
-
+WORKDIR /app
 COPY index.js /app/
 COPY package.json /app/
-COPY test /app/
+COPY test/ /app/
 
 RUN npm install
+
+COPY entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["start"]
+
+EXPOSE 53
