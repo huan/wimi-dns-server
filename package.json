@@ -21,4 +21,5 @@
         "test": "tap test/*.js"
         , "start": "./index.js"
     }
+    , "readme": "README.md"
 }
