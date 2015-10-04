@@ -1,0 +1,22 @@
+{ 
+    "name": "wimi-dns-server"
+    , "description": "Tell you what your IP address is, by answer your dns query. WiMI - What is My IP"
+
+    , "keywords": [ "dns", "wimi" ]
+, "version": "0.1.0"
+, "author": "Zhuohuan LI <zixia@zixia.net>"
+, "repository": { "type":"git", "url":"https://github.com/zixa/docker/wimi-dns-server" }
+, "licenses": [{ "type": "Apache 2.0", "url": "https://github.com/jhs/dnsd/blob/master/LICENSE" }]
+
+, "engines": { "node": ">= 0.8" }
+, "main": "./index.js"
+
+, "dependencies": { "dnsd": ""
+}
+, "devDependencies": { "tap": "~0.2.5"
+}
+, "scripts": { 
+    "test": "tap test/*.js"
+,   "start": "./index.js"
+}
+}
