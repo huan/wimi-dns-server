@@ -19,11 +19,18 @@ console.log(BANNER)
 
 var dnsd = require('dnsd')
 
+var Logger = require('le_node');
+var log = new Logger({
+      token:'5a91fefa-a0ea-4e8f-b3a2-a3f6aa1f8b75'
+});
+
 var wimi = dnsd.createServer(function(req, res) {
     var queryName   = req.question[0].name
     var queryType   = req.question[0].type
     var queryClass  = req.question[0]['class']
     var remoteAddress = req.connection.remoteAddress
+
+    log.info(remoteAddress + ' ' + queryName)
 
     console.log(">> "
                 + new Date().toISOString()
@@ -47,6 +54,8 @@ wimi.on('error',function(err){
             console.log(new Date().toISOString()
                         + ' Root privilege required. Fatal error: ' + err + '.'
                        )
+            process.exit(1)
+
             break
     }
 
@@ -71,6 +80,11 @@ function show_help() {
         console.log('  dig @WiMi-dns-server-ip WhatIsMyIp.zixia.net')
 	console.log('')
     });
+
+
+    // generic log method, also accepts JSON entries
+    log.log("debug", {sleep:"all night", work:"all day"})
+
     /*
     http://unix.stackexchange.com/a/81699
     alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
