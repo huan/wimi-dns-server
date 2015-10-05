@@ -33,10 +33,28 @@ var wimi = dnsd.createServer(function(req, res) {
     res.end(remoteAddress)
 })
 
+wimi.on('error',function(err){
+    switch (true) {
+        case /Error processing request/.test(err) :
+            console.log(new Date().toISOString()
+                        + ' ' + 'Invalid udp package dropped.'
+                        + ' ' + err
+                       )
+            break
+        case /EACCES/.test(err) :
+            // fallthrough default
+        default :
+            console.log(new Date().toISOString()
+                        + ' Root privilege required. Fatal error: ' + err + '.'
+                       )
+            break
+    }
+
+})
+
 wimi.listen(53, '0.0.0.0')
 
-console.log('WiMI DNS Server running at 127.0.0.1:5353')
-console.log('WiMI - What is My IP')
+console.log('WiMI(WhatIsMyIP) DNS Server running at 0.0.0.0:53')
 show_help()
 
 function show_help() {
@@ -44,7 +62,7 @@ function show_help() {
     var socket = require('net').createConnection(80, 'www.google.com');
     socket.on('connect', function() {
         console.log('Get my IP by send a DNS Query. i.e.:')
-        console.log('  dig @' + socket.address().address + ' WhatIsMyIp.zixia.net')
+        console.log('  dig @' + socket.address().address + ' WhatIsMyIp')
         socket.end()
     })
 

@@ -1,5 +1,6 @@
 { 
     "name": "wimi-dns-server"
+    , "private": true
     , "description": "Tell you what your IP address is, by answer your dns query. WiMI - What is My IP"
 
     , "keywords": [ "dns", "wimi", "whatismyip", "whatismyipaddress" ]
