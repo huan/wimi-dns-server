@@ -34,6 +34,9 @@ then
 
     echo '>> Starting test...'
     exec npm test
+elif [ "shell" == "$1" ]
+    echo ">> Exec bash ..."
+    exec /bin/bash
 else
     echo ">> Exec $@ ..."
     exec $@
