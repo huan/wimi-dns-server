@@ -32,9 +32,7 @@ var wimi = dnsd.createServer(function(req, res) {
 
     log.info(remoteAddress + ' ' + queryName)
 
-    console.log(">> "
-                + new Date().toISOString()
-                + ' ' + remoteAddress
+    console.log(remoteAddress
                 + ' ' + queryName
                )
     res.end(remoteAddress)
