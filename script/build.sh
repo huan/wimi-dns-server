@@ -1,7 +1,7 @@
 #!/bin/bash
 
-TAG="tutum.co/zixia/wimi-dns-server"
+# TAG="tutum.co/zixia/wimi-dns-server"
+IMAGE="wimi"
 
-docker build -t $TAG . \
-    && docker run $TAG test \
-    && docker push $TAG
+docker build -t $IMAGE . \
+    && docker run $IMAGE test

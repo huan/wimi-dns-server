@@ -15,8 +15,8 @@ COPY test /app/test
 
 RUN npm install
 
-COPY entrypoint.sh /
-ENTRYPOINT ["/entrypoint.sh"]
+COPY entrypoint.sh .
+ENTRYPOINT ["./entrypoint.sh"]
 CMD ["start"]
 
 EXPOSE 53/udp

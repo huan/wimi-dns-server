@@ -8,15 +8,13 @@ ARGV=$@
 echo ">> Starting..."
 cd /app
 
-if [ 0 -eq ${#@} ] || [ "start" == "$1" ]
-then
+if [ 0 -eq ${#@} ] || [ "start" == "$1" ]; then
     while true; do
         node index.js
         sleep 1
         echo ">> Restarting..."
     done
-elif [ "test" == "$1" ]
-then
+elif [ "test" == "$1" ]; then
     node index.js &
 
     n=0
@@ -34,7 +32,7 @@ then
 
     echo '>> Starting test...'
     exec npm test
-elif [ "shell" == "$1" ]
+elif [ "shell" == "$1" ]; then
     echo ">> Exec bash ..."
     exec /bin/bash
 else

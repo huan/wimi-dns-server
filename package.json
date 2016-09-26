@@ -32,7 +32,7 @@
     "tap": ">=0.2.5"
   },
   "scripts": {
-    "test": "tap test/*.js",
+    "test": "bash -n entrypoint.sh && tap test/*.js",
     "start": "./index.js"
   },
   "readme": "README.md"
